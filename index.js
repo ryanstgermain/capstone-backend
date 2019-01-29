@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
-//const queries = require('./queries.js');
+const queries = require('./queries.js');
 const knex = require('knex');
 
 app.use(cors());
@@ -18,15 +18,15 @@ app.get('/:id', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-    queries.dbQueryCreateMovie(req.body).then(movies => res.send(movies))
+    queries.dbQueryCreateListing(req.body).then(movies => res.send(movies))
 })
 
 app.delete('/:id', (req, res) => {
-    queries.deleteMovie(req.params.id).then(res.status(204).send())
+    queries.deleteListing(req.params.id).then(res.status(204).send())
 })
 
 app.put('/:id', (req, res) => {
-    queries.dbQueryUpdateMovie(req.params.id, req.body).then(updatedMovieInfo => res.json(updatedMovieInfo[0]))
+    queries.dbQueryUpdateListing(req.params.id, req.body).then(updatedMovieInfo => res.json(updatedMovieInfo[0]))
 })
 
 app.use(function (req, res, next) {

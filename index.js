@@ -14,11 +14,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:id', (req, res) => {
-    queries.dbQueryGetById(req.params.id).then(movies => res.send(movies))
+    queries.dbQueryGetById(req.params.id).then(listings => res.send(listings))
 })
 
 app.post('/', (req, res) => {
-    queries.dbQueryCreateListing(req.body).then(movies => res.send(movies))
+    queries.dbQueryCreateListing(req.body).then(listings => res.send(listings))
 })
 
 app.delete('/:id', (req, res) => {
@@ -26,7 +26,7 @@ app.delete('/:id', (req, res) => {
 })
 
 app.put('/:id', (req, res) => {
-    queries.dbQueryUpdateListing(req.params.id, req.body).then(updatedMovieInfo => res.json(updatedMovieInfo[0]))
+    queries.dbQueryUpdateListing(req.params.id, req.body).then(updatedListingInfo => res.json(updatedListingInfo[0]))
 })
 
 app.use(function (req, res, next) {

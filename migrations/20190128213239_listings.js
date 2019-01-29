@@ -1,6 +1,7 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('listings', (listing) => {
         listing.increments('id')
+        listing.string('title')
         listing.string('location')
         listing.string('list')
         listing.string('description')

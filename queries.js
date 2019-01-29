@@ -1,19 +1,19 @@
 const db = require('./database-connection');
     module.exports = {
         dbQueryGetAll(){
-            return db.select().from('grailtrader')
+            return db.select().from('listings')
         },
         dbQueryGetById(id){
-            return db('grailtrader').where({id: id}).first()
+            return db('listings').where({id: id}).first()
         },
-        dbQueryCreateListing(newMovie){
-            return db('grailtrader').insert(newMovie).returning('*')
+        dbQueryCreateListing(newListing){
+            return db('listings').insert(newListing).returning('*')
         },
-        dbQueryUpdateListing(id, updatedMovieInfo){
-            return db('grailtrader').where('id', id).update(updatedMovieInfo).returning('*')
+        dbQueryUpdateListing(id, updatedListingInfo){
+            return db('listings').where('id', id).update(updatedListingInfo).returning('*')
         },
         deleteListing(id){
-            return db('grailtrader')
+            return db('listings')
                 .where('id', id)
                 .delete()
         }

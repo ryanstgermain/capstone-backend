@@ -5,6 +5,16 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const queries = require('./queries.js');
 const knex = require('knex');
+const server = app.listen(3000)
+
+const io = require('socket.io')(server);
+
+io.on('connection', function(socket) {
+    console.log(socket.id, "<-Socket")
+    socket.on("SEND_MESSAGE", function(data) {
+        io.emit("MESSAGE", data)
+    })
+});
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -38,9 +48,9 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Something broke!')
 })
 
-app.listen(port, function() {
-    console.log(`Listening on ${port}`);
-})
+// app.listen(port, function() {
+//     console.log(`Listening on ${port}`);
+// })
 
 module.exports = app
 
